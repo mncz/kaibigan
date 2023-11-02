@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./img/favicon.ico">
+    <link rel="stylesheet" href="./css/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.min.js"></script>
+    <title>Kaibigan</title>
+</head>
+<body>
+    <div class="bg-light d-flex flex-column min-vh-100 min-vw-100">
+        <nav class="navbar sticky-top bg-dark mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand text-light" href="#">
+                    <img src="./img/logo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> Kaibigan
+                </a>
+            </div>
+        </nav>
+        <div class="d-flex flex-column flex-grow-1 justify-content-center align-items-center">
+            <h1 id="welcome" class="pb-2"><span id="typewriter">Welcome!</span><span id="cursor" class="fw-lighter">|</span></h1>
+            <div class="shadow card" id="loginCard">
+                <div class="card-body">
+                    <form id="login">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="emailInput" placeholder="name@example.com">
+                            <label for="emailInput">Email address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+                            <label for="passwordInput">Password</label>
+                        </div>
+                        <div class="d-grid mb-3">
+                            <button type="button" class="btn btn-outline-primary">Login</button>
+                        </div>
+                    </form>
+                    <div class="text-center fs-7">
+                        <a href="">Forgotten password?</a>
+                    </div>
+                    <hr>
+                    <div class="d-grid">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#signinModal">Sign in</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                <div class="col-md-4 d-flex ms-2 align-items-center lh-1">
+                    <i class="fa-brands fa-osi me-2 text-muted"></i>
+                    <span class="text-muted">2023 <b>Kaibigan</b></span>
+                </div>
+                <div class="col-md-4 me-2 justify-content-end text-end lh-1">
+                    <a href="https://github.com/mncz" class="text-muted align-baseline" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="mncz ✌️"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </footer>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="signinModal" tabindex="-1" aria-labelledby="signinModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-4">Welcome! 👋</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="signin">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="First name">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Last name">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <input type="email" class="form-control" placeholder="Email address">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <input type="password" class="form-control" placeholder="Password">
+                            </div>
+                        </div>
+                        <p class="fs-7 text-muted text-center">
+                            By proceeding you agree to our <a href="#">terms and conditions</a>.
+                        </p>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-success">Enter</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const messages = [
+            'Welkom',
+            'Bienvenue',
+            'Benvenuto',
+            'Добро пожаловать',
+            'Velkommen',
+            'Bem-vindo',
+            'مرحباً',
+            '欢迎',
+            'ようこそ',
+            '어서 오세요',
+            'Welkom',
+            'Welcome'
+        ]
+
+        function sleep(ms) {
+            return new Promise((resolve) => setTimeout(resolve, ms))
+        }
+
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max)
+        }
+
+        $( document ).ready(() => {
+            const tooltipTrigger = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+            const tooltips = [...tooltipTrigger].map(tooltip => new bootstrap.Tooltip(tooltip))
+            const tw = document.getElementById('typewriter')
+            const sleepTime = 100
+            let currentIndex = getRandomInt(messages.length)
+
+            const writeLoop = async () => {
+                while (true) {
+                    currentMessage = messages[currentIndex]
+
+                    if (currentIndex == 6) {
+                        $( '#cursor' ).after($( '#typewriter' ))
+                    }
+
+                    for (let i = 0; i < currentMessage.length; i++) {
+                        tw.innerText = currentMessage.substring(0, i + 1)
+                        await sleep(sleepTime)
+                    }
+                    
+                    await sleep(sleepTime * 14)
+                    
+                    for (let i = currentMessage.length; i > 0; i--) {
+                        tw.innerText = currentMessage.substring(0, i - 1)
+                        await sleep(sleepTime)
+                    }
+
+                    await sleep(sleepTime * 8)
+
+                    if (currentIndex == 6) {
+                        $( '#cursor' ).before($( '#typewriter' ))
+                    }
+
+                    let previous = currentIndex
+
+                    do {
+                        currentIndex = getRandomInt(messages.length)
+                    } while (previous == currentIndex)
+
+                }
+            }
+
+            writeLoop()
+        })
+    </script>
+</body>
+</html>

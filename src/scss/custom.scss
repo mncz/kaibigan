@@ -1,0 +1,41 @@
+$min-contrast-ratio: 2;
+$primary: #0e6fcf;
+$success: #00c377;
+$component-active-bg: $success;
+$focus-ring-color: rgba($success, .25);
+
+body {
+    height: 100vh;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+footer a {
+    font-size: 1.6rem;
+}
+
+.fs-7 {
+    font-size: .8rem;
+}
+
+#welcome {
+    user-select: none;
+}
+
+#cursor {
+    animation: blink 1s steps(5, start) infinite;
+}
+
+#loginCard {
+    width: 350px;
+}
+
+@keyframes blink {
+    to {
+        visibility: hidden
+    }
+}
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
