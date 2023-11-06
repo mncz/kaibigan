@@ -7,11 +7,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true })); 
 app.use('/css', staticPath('./node_modules/bootstrap/dist/css'))
 app.use('/css', staticPath('./node_modules/animate.css/'))
-app.use('/css', staticPath('./public/css'))
+app.use('/css', staticPath('./public/src/css'))
 app.use('/js', staticPath('./node_modules/@popperjs/core/dist/umd'))
 app.use('/js', staticPath('./node_modules/bootstrap/dist/js'))
 app.use('/js', staticPath('./node_modules/jquery/dist'))
-app.use('/img', staticPath('./public/img'))
+app.use('/img', staticPath('./public/src/img'))
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, './views/index.html'))
